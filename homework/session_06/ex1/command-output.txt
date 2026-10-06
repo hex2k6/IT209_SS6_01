@@ -1,0 +1,48 @@
+www-data:x:33:
++ id
++ pwd
+uid=1001(runner) gid=1001(runner) groups=1001(runner),4(adm),100(users),118(docker),999(systemd-journal)
++ ls -ld / /etc /usr /var /tmp /home
+/home/runner/work/IT209_SS6_01/IT209_SS6_01
+drwxr-xr-x   23 root root  4096 Oct  6 15:00 /
++ sudo mkdir -p /var/www/my-app/public /var/www/my-app/logs
+drwxr-xr-x  139 root root 12288 Oct  6 15:00 /etc
+drwxr-xr-x+   5 root root  4096 Sep 27 22:08 /home
+drwxrwxrwt   14 root root  4096 Oct  6 15:01 /tmp
+drwxr-xr-x   13 root root  4096 Sep 27 21:12 /usr
+drwxr-xr-x   14 root root  4096 Sep 27 21:38 /var
++ printf '<!doctype html><html lang="vi"><meta charset="utf-8"><title>My App</title><h1>My App</h1></html>\n'
++ sudo tee /var/www/my-app/public/index.html
++ printf 'Application initialized.\n'
++ sudo tee /var/www/my-app/logs/app.log
++ sudo chown -R runner:www-data /var/www/my-app
++ sudo chmod 750 /var/www/my-app
++ sudo chmod 750 /var/www/my-app/public
++ sudo chmod 770 /var/www/my-app/logs
++ sudo chmod u=rwx,g=rx,o= /var/www/my-app/public
++ sudo chmod u=rwx,g=rwx,o= /var/www/my-app/logs
++ sudo chmod 640 /var/www/my-app/public/index.html
++ sudo chmod 660 /var/www/my-app/logs/app.log
++ cd /var/www/my-app
+/var/www/my-app
+/var/www/my-app/public
+/var/www/my-app/logs
++ pwd
++ cd public
++ pwd
++ cd ../logs
++ pwd
++ cd ..
++ set +x
+=== LS_OUTPUT_BEGIN ===
+total 16
+drwxr-x--- 4 runner www-data 4096 Oct  6 15:01 .
+drwxr-xr-x 4 root   root     4096 Oct  6 15:01 ..
+drwxrwx--- 2 runner www-data 4096 Oct  6 15:01 logs
+drwxr-x--- 2 runner www-data 4096 Oct  6 15:01 public
+=== LS_OUTPUT_END ===
+drwxr-x--- 750 runner:www-data public
+drwxrwx--- 770 runner:www-data logs
+-rw-r----- 640 runner:www-data public/index.html
+-rw-rw---- 660 runner:www-data logs/app.log
+PASS: directory modes, ownership, group access and others restrictions.
