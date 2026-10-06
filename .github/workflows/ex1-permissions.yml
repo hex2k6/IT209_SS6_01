@@ -1,0 +1,16 @@
+name: Verify FHS and permissions
+on:
+  push:
+    paths:
+      - homework/session_06/ex1/practice.sh
+      - .github/workflows/ex1-permissions.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  practice:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Linux exercise and capture real output
+        run: bash homework/session_06/ex1/practice.sh
